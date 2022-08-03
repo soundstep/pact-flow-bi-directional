@@ -1,7 +1,8 @@
 import discoveryResponse from '../fixtures/discovery.json'
 
 before(() => {
-  cy.setupPact('ui-consumer', 'api-provider')
+  // provider is the same as PACTICIPANT in Makefile when pushing the provider contract
+  cy.setupPact('pact-flow-bi-directional-consumer', 'pact-flow-bi-directional-provider')
 })
 
 describe('empty spec', () => {
