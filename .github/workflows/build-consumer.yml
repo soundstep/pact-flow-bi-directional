@@ -21,8 +21,8 @@ jobs:
           pnpm install
           pnpm build
           pnpm cypress:up
-          onpm cypress:run
-          onpm cypress:down
+          pnpm cypress:run
+          pnpm cypress:down
       - name: Test and upload to Pactflow
         run: |
           export BRANCH=${GITHUB_REF:11}
