@@ -20,7 +20,7 @@ jobs:
           npm install -g pnpm@7
           pnpm install
           pnpm build
-          onpm cypress:up
+          pnpm cypress:up
           onpm cypress:run
           onpm cypress:down
       - name: Test and upload to Pactflow
