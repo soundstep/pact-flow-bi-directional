@@ -17,7 +17,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
+    "serve": "serve -l 8080 ./build",
+    "cypress:open": "cypress open",
+    "cypress:up": "pnpm serve & wait-on http://localhost:8080",
+    "cypress:run": "cypress run",
+    "cypress:down": "kill-port --port 8080"
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +44,9 @@
   "devDependencies": {
     "@pact-foundation/pact-web": "^9.18.1",
     "@pactflow/pact-cypress-adapter": "^1.2.6",
-    "cypress": "^10.3.1"
+    "cypress": "^10.3.1",
+    "kill-port": "^2.0.1",
+    "serve": "^14.0.1",
+    "wait-on": "^6.0.1"
   }
 }

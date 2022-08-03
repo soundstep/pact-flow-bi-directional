@@ -14,10 +14,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: 🧪 Test and upload to Pactflow 📈
+      - name: Run tests and generate pact files
+        run: |
+          cd consumer-pact
+          npm install -g pnpm@7
+          pnpm install
+          pnpm build
+          onpm cypress:up
+          onpm cypress:run
+          onpm cypress:down
+      - name: Test and upload to Pactflow
         run: |
           export BRANCH=${GITHUB_REF:11}
-          export PACT_FILES_LOCATION=cypress/pacts
+          export PACT_FILES_LOCATION=consumer-spa/cypress/pacts
           export VERSION=1.0.0
           docker run --rm pactfoundation/pact-cli:latest \
             pact-broker publish ${PACT_FILES_LOCATION} \
