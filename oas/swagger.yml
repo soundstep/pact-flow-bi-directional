@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   contact: {}
 servers:
-- url: http://muninn.prd.oasvc.itv.com
+- url: https://content-inventory.prd.oasvc.itv.com
 paths:
   /discovery:
     get:

@@ -7,11 +7,10 @@ before(() => {
 
 describe('empty spec', () => {
   it('passes', () => {
-    // cy.intercept('POST', 'http://muninn.prd.oasvc.itv.com/discovery').as('getDiscovery')
     cy.intercept(
       {
-        method: 'POST',
-        url: '**/discovery'
+        method: 'GET',
+        url: '**/discovery?query=*'
       },
       {
         statusCode: 200,

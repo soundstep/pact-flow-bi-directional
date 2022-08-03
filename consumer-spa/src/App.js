@@ -3,196 +3,203 @@ import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 
-const query = `
-{
-  featuredSliderSlot1: targetedContainers(
-    filter: { id: "6PE58jxxneY63rHfSD0h6Z", published: true }
-  ) {
-    ...CollectionFields
-  }
-  promotedProductionsSliderSlot4: targetedContainers(
-    filter: { id: "7Iq7gzzv8duUKCbwtfENc", published: true }
-  ) {
-    ...CollectionFields
-  }
-  promotedProductionsSliderSlot2: targetedContainers(
-    filter: { id: "4ynbPheciXholKySviVAIR", published: true }
-  ) {
-    ...CollectionFields
-  }
-  promotedProductionsSliderSlot3: targetedContainers(
-    filter: { id: "2MEbm8J2QzICB2YC1o6EQp", published: true }
-  ) {
-    ...CollectionFields
-  }
-  promotedProductionsSliderSlot1: targetedContainers(
-    filter: { id: "2iMpaAU4EXRtgQHEpZZrlA", published: true }
-  ) {
-    ...CollectionFields
-  }
-  genreSliderSlot1: targetedContainers(
-    filter: { id: "3PhbJKEE6RtJuKCEZLc1MO", published: true }
-  ) {
-    ...CollectionFields
-  }
-  genreSliderSlot2: targetedContainers(
-    filter: { id: "4Mw4BnGS3G2BlAYrCdRk0H", published: true }
-  ) {
-    ...CollectionFields
-  }
-  genreSliderSlot4: targetedContainers(
-    filter: { id: "6Td6l6yZNUKAJL4OhjhVdE", published: true }
-  ) {
-    ...CollectionFields
-  }
-  genreSliderSlot3: targetedContainers(
-    filter: { id: "43ey5GyghH8q5HOJVOuPmo", published: true }
-  ) {
-    ...CollectionFields
-  }
-}
-fragment CollectionFields on TargetedContainer {
-  id
-  name
-  destination
-  priority
-  content {
-    ... on CollectionSpot {
-      collection {
-        id
-        title
-        subsequentJourney {
-          name
-          label
-          destinationUrl(platform: CTV)
-        }
-        imageTreatment
-        imageAspectRatio
-        imageClass
-        items(
-          filter: {
-            available: "NOW"
-            features: [
-              PROGRESSIVE
-              OUTBAND_WEBVTT
-              INBAND_AUDIO_DESCRIPTION
-              MPEG_DASH
-              WIDEVINE
-            ]
-            broadcaster: ITV
-            platform: CTV
-          }
-        ) {
-          itemType
-          imageUrl
-          ... on SeriesCollectionItem {
-            seriesItem {
-              seriesNumber
-              synopses {
-                ninety
-              }
-              brand {
-                title
-                categories
-                imageUrl
-              }
-              earliestAvailableTitle {
-                legacyId
-                imageUrl
-                broadcastDateTime
-                brandLegacyId
-                channel {
-                  name
-                }
-                availableNow
-              }
-            }
-          }
-          ... on TitleCollectionItem {
-            titleItem {
-              ... on Special {
-                categories
-                title
-                brand {
-                  imageUrl
-                }
-              }
-              ... on Film {
-                categories
-                title
-                brand {
-                  imageUrl
-                }
-              }
-              ... on Episode {
-                brand {
-                  categories
-                  title
-                  imageUrl
-                }
-              }
-              ... on Title {
-                titleType
-                imageUrl
-                legacyId
-                brandLegacyId
-                brand {
-                  title
-                  legacyId
-                  categories
-                  imageUrl
-                }
-                synopses {
-                  ninety
-                }
-                broadcastDateTime
-                channel {
-                  name
-                }
-                availableNow
-              }
-            }
-          }
-          ... on BrandCollectionItem {
-            brandItem {
-              title
-              synopses {
-                ninety
-              }
-              imageUrl
-              legacyId
-              categories
-              latestAvailableTitle {
-                legacyId
-                imageUrl
-                broadcastDateTime
-                channel {
-                  name
-                }
-                availableNow
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`;
+// const bodyQuery = `
+// {
+//   featuredSliderSlot1: targetedContainers(
+//     filter: { id: "6PE58jxxneY63rHfSD0h6Z", published: true }
+//   ) {
+//     ...CollectionFields
+//   }
+//   promotedProductionsSliderSlot4: targetedContainers(
+//     filter: { id: "7Iq7gzzv8duUKCbwtfENc", published: true }
+//   ) {
+//     ...CollectionFields
+//   }
+//   promotedProductionsSliderSlot2: targetedContainers(
+//     filter: { id: "4ynbPheciXholKySviVAIR", published: true }
+//   ) {
+//     ...CollectionFields
+//   }
+//   promotedProductionsSliderSlot3: targetedContainers(
+//     filter: { id: "2MEbm8J2QzICB2YC1o6EQp", published: true }
+//   ) {
+//     ...CollectionFields
+//   }
+//   promotedProductionsSliderSlot1: targetedContainers(
+//     filter: { id: "2iMpaAU4EXRtgQHEpZZrlA", published: true }
+//   ) {
+//     ...CollectionFields
+//   }
+//   genreSliderSlot1: targetedContainers(
+//     filter: { id: "3PhbJKEE6RtJuKCEZLc1MO", published: true }
+//   ) {
+//     ...CollectionFields
+//   }
+//   genreSliderSlot2: targetedContainers(
+//     filter: { id: "4Mw4BnGS3G2BlAYrCdRk0H", published: true }
+//   ) {
+//     ...CollectionFields
+//   }
+//   genreSliderSlot4: targetedContainers(
+//     filter: { id: "6Td6l6yZNUKAJL4OhjhVdE", published: true }
+//   ) {
+//     ...CollectionFields
+//   }
+//   genreSliderSlot3: targetedContainers(
+//     filter: { id: "43ey5GyghH8q5HOJVOuPmo", published: true }
+//   ) {
+//     ...CollectionFields
+//   }
+// }
+// fragment CollectionFields on TargetedContainer {
+//   id
+//   name
+//   destination
+//   priority
+//   content {
+//     ... on CollectionSpot {
+//       collection {
+//         id
+//         title
+//         subsequentJourney {
+//           name
+//           label
+//           destinationUrl(platform: CTV)
+//         }
+//         imageTreatment
+//         imageAspectRatio
+//         imageClass
+//         items(
+//           filter: {
+//             available: "NOW"
+//             features: [
+//               PROGRESSIVE
+//               OUTBAND_WEBVTT
+//               INBAND_AUDIO_DESCRIPTION
+//               MPEG_DASH
+//               WIDEVINE
+//             ]
+//             broadcaster: ITV
+//             platform: CTV
+//           }
+//         ) {
+//           itemType
+//           imageUrl
+//           ... on SeriesCollectionItem {
+//             seriesItem {
+//               seriesNumber
+//               synopses {
+//                 ninety
+//               }
+//               brand {
+//                 title
+//                 categories
+//                 imageUrl
+//               }
+//               earliestAvailableTitle {
+//                 legacyId
+//                 imageUrl
+//                 broadcastDateTime
+//                 brandLegacyId
+//                 channel {
+//                   name
+//                 }
+//                 availableNow
+//               }
+//             }
+//           }
+//           ... on TitleCollectionItem {
+//             titleItem {
+//               ... on Special {
+//                 categories
+//                 title
+//                 brand {
+//                   imageUrl
+//                 }
+//               }
+//               ... on Film {
+//                 categories
+//                 title
+//                 brand {
+//                   imageUrl
+//                 }
+//               }
+//               ... on Episode {
+//                 brand {
+//                   categories
+//                   title
+//                   imageUrl
+//                 }
+//               }
+//               ... on Title {
+//                 titleType
+//                 imageUrl
+//                 legacyId
+//                 brandLegacyId
+//                 brand {
+//                   title
+//                   legacyId
+//                   categories
+//                   imageUrl
+//                 }
+//                 synopses {
+//                   ninety
+//                 }
+//                 broadcastDateTime
+//                 channel {
+//                   name
+//                 }
+//                 availableNow
+//               }
+//             }
+//           }
+//           ... on BrandCollectionItem {
+//             brandItem {
+//               title
+//               synopses {
+//                 ninety
+//               }
+//               imageUrl
+//               legacyId
+//               categories
+//               latestAvailableTitle {
+//                 legacyId
+//                 imageUrl
+//                 broadcastDateTime
+//                 channel {
+//                   name
+//                 }
+//                 availableNow
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+// `;
+
+const query = '%7B%20featuredSliderSlot1:%20targetedContainers(%20filter:%20%7B%20id:%20%226PE58jxxneY63rHfSD0h6Z%22%20published:%20true%20%7D%20)%20%7B%20...CollectionFields%20%7D%20promotedProductionsSliderSlot4:%20targetedContainers(%20filter:%20%7B%20id:%20%227Iq7gzzv8duUKCbwtfENc%22%20published:%20true%20%7D%20)%20%7B%20...CollectionFields%20%7D%20promotedProductionsSliderSlot2:%20targetedContainers(%20filter:%20%7B%20id:%20%224ynbPheciXholKySviVAIR%22%20published:%20true%20%7D%20)%20%7B%20...CollectionFields%20%7D%20promotedProductionsSliderSlot3:%20targetedContainers(%20filter:%20%7B%20id:%20%222MEbm8J2QzICB2YC1o6EQp%22%20published:%20true%20%7D%20)%20%7B%20...CollectionFields%20%7D%20promotedProductionsSliderSlot1:%20targetedContainers(%20filter:%20%7B%20id:%20%222iMpaAU4EXRtgQHEpZZrlA%22%20published:%20true%20%7D%20)%20%7B%20...CollectionFields%20%7D%20genreSliderSlot1:%20targetedContainers(%20filter:%20%7B%20id:%20%223PhbJKEE6RtJuKCEZLc1MO%22%20published:%20true%20%7D%20)%20%7B%20...CollectionFields%20%7D%20genreSliderSlot2:%20targetedContainers(%20filter:%20%7B%20id:%20%224Mw4BnGS3G2BlAYrCdRk0H%22%20published:%20true%20%7D%20)%20%7B%20...CollectionFields%20%7D%20genreSliderSlot4:%20targetedContainers(%20filter:%20%7B%20id:%20%226Td6l6yZNUKAJL4OhjhVdE%22%20published:%20true%20%7D%20)%20%7B%20...CollectionFields%20%7D%20genreSliderSlot3:%20targetedContainers(%20filter:%20%7B%20id:%20%2243ey5GyghH8q5HOJVOuPmo%22%20published:%20true%20%7D%20)%20%7B%20...CollectionFields%20%7D%20%7D%20fragment%20CollectionFields%20on%20TargetedContainer%20%7B%20id%20name%20destination%20priority%20content%20%7B%20...%20on%20CollectionSpot%20%7B%20collection%20%7B%20id%20title%20subsequentJourney%20%7B%20name%20label%20destinationUrl(platform:%20CTV)%20%7D%20imageTreatment%20imageAspectRatio%20imageClass%20items(%20filter:%20%7B%20available:%20%22NOW%22%20features:%20%5B%20PROGRESSIVE%20OUTBAND_WEBVTT%20INBAND_AUDIO_DESCRIPTION%20MPEG_DASH%20WIDEVINE%20%5D%20broadcaster:%20ITV%20platform:%20CTV%20%7D%20)%20%7B%20itemType%20imageUrl%20...%20on%20SeriesCollectionItem%20%7B%20seriesItem%20%7B%20seriesNumber%20synopses%20%7B%20ninety%20%7D%20brand%20%7B%20title%20categories%20imageUrl%20%7D%20earliestAvailableTitle%20%7B%20legacyId%20imageUrl%20broadcastDateTime%20brandLegacyId%20channel%20%7B%20name%20%7D%20availableNow%20%7D%20%7D%20%7D%20...%20on%20TitleCollectionItem%20%7B%20titleItem%20%7B%20...%20on%20Special%20%7B%20categories%20title%20brand%20%7B%20imageUrl%20%7D%20%7D%20...%20on%20Film%20%7B%20categories%20title%20brand%20%7B%20imageUrl%20%7D%20%7D%20...%20on%20Episode%20%7B%20brand%20%7B%20categories%20title%20imageUrl%20%7D%20%7D%20...%20on%20Title%20%7B%20titleType%20imageUrl%20legacyId%20brandLegacyId%20brand%20%7B%20title%20legacyId%20categories%20imageUrl%20%7D%20synopses%20%7B%20ninety%20%7D%20broadcastDateTime%20channel%20%7B%20name%20%7D%20availableNow%20%7D%20%7D%20%7D%20...%20on%20BrandCollectionItem%20%7B%20brandItem%20%7B%20title%20synopses%20%7B%20ninety%20%7D%20imageUrl%20legacyId%20categories%20latestAvailableTitle%20%7B%20legacyId%20imageUrl%20broadcastDateTime%20channel%20%7B%20name%20%7D%20availableNow%20%7D%20%7D%20%7D%20%7D%20%7D%20%7D%20%7D%20%7D';
 
 function App() {
 
   const [data, setData] = useState({});
 
   useEffect(() => {
-    console.log('OK', axios);
-    axios.post('http://muninn.prd.oasvc.itv.com/discovery', {
-      query
-    }).then((res) => {
-      setData(res.data.data);
-    }).catch((err) => {
-      console.log('Error', err);
-    });
+    // axios.post('http://muninn.prd.oasvc.itv.com/discovery', {
+    //   bodyQuery
+    // }).then((res) => {
+    //   setData(res.data.data);
+    // }).catch((err) => {
+    //   console.log('Error', err);
+    // });
+    axios.get(`https://content-inventory.prd.oasvc.itv.com/discovery?query=${query}`)
+      .then((res) => {
+        setData(res.data.data);
+      }).catch((err) => {
+        console.log('Error', err);
+      });
   }, [])
 
   return (
@@ -202,7 +209,7 @@ function App() {
         <p>
           Loading Muninn stuff (be on the VPN)...
         </p>
-        <div class="code">
+        <div className="code">
             <pre>
               {JSON.stringify(data, undefined, 2)}
             </pre>
