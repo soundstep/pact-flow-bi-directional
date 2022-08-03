@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
-export BRANCH=${GITHUB_REF:11}
-export PACT_FILES_LOCATION=consumer-spa/cypress/pacts
-export VERSION=1.0.0
-
 if [[ -z "${PACT_BROKER_BASE_URL}" ]]; then
     echo "Error, could not find env var PACT_BROKER_BASE_URL"
     exit 1
 elif [[ -z "${PACT_BROKER_TOKEN}" ]]; then
     echo "Error, could not find env var PACT_BROKER_TOKEN"
     exit 1
+elif [[ -z "${GITHUB_REF}" ]]; then
+    echo "Error, could not find env var GITHUB_REF"
+    exit 1
 fi
+
+export BRANCH=${GITHUB_REF:11}
+export PACT_FILES_LOCATION=consumer-spa/cypress/pacts
+export VERSION="$GITHUB_REF"
 
 docker run --rm \
     -v $(pwd):/$(pwd) \
