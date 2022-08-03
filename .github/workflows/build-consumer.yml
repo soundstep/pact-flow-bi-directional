@@ -22,5 +22,5 @@ jobs:
           docker run --rm pactfoundation/pact-cli:latest \
             pact-broker publish ${PACT_FILES_LOCATION} \
             --consumer-app-version ${VERSION} \
-            --broker-base-url ${PACT_BROKER_BASE_URL \
+            --broker-base-url ${PACT_BROKER_BASE_URL} \
             --branch main
