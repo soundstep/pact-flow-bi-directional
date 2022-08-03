@@ -25,4 +25,6 @@ jobs:
           pnpm cypress:down
       - name: Publish to Pactflow
         run: |
+          export PACT_BROKER_TOKEN=${{ env.PACT_BROKER_TOKEN }}
+          export PACT_BROKER_BASE_URL=${{ env.PACT_BROKER_BASE_URL }}
           ./.github/actions/publish-consumer.sh
